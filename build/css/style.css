@@ -1,0 +1,17 @@
+input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px red inset; /* aqui muda sua cor do fundo */
+    -webkit-text-fill-color: #ccc; /* Cor do texto */
+}
+
+.hide{
+    display: none;
+}
+
+.controls a {
+  margin: 4px;
+}
+
+.dataTables_filter input {
+  margin-left: 4px;
+  border-radius: 4px;
+}
