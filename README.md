@@ -1,5 +1,5 @@
 # sistemalaudo
 Sistema Laudo
 
-#Instalar
+# Instalar
 git clone https://github.com/fabricioesmerio/sistemalaudo.git
