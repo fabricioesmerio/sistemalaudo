@@ -7,7 +7,7 @@ function connectdb() {
 
 
     $dns = "pgsql:host=" . HOST . ";dbname=" . NAMEDB;
-    $opcoes = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8', PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
+    $opcoes = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
     try {
         $conexao = new PDO($dns, USER, PASS, $opcoes);
         $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
