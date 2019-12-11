@@ -14,7 +14,6 @@
 <!-- jQuery -->
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
 <!-- Meu JavaScript-->
-<script src="../build/js/js.js" type="text/javascript"></script>
 <script src="../build/js/jquery-ui.min.js" type="text/javascript"></script>
 <!-- JS DO DATATABLE-->
 <!-- <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
@@ -27,6 +26,10 @@
 
 <!-- jQuery custom content scroller -->
 <script src="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"></script>
+
+<script src="../build/js/js.js" type="text/javascript"></script>
 
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>

@@ -30,7 +30,8 @@ verificaSessao();
         <link href="../build/css/custom.min.css" rel="stylesheet">
         <link href="../build/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
         <!-- DATATABLE CSS-->
-        <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+        <!-- <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/> -->
+        <link href="//datatables.net/download/build/nightly/jquery.dataTables.css" rel="stylesheet" type="text/css" />
 
         <link href="../build/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="../build/css/default.min.css" rel="stylesheet" type="text/css"/>
