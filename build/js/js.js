@@ -76,6 +76,7 @@ $('document').ready(function () {
 
 $(document).ready(function() {
     $('#studyList').DataTable({
+        "order": [[ 2, "desc" ]],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
         }
