@@ -31,8 +31,34 @@ $('document').ready(function () {
     // });
 
 
+    function saveDoc(id, path) {
+        // login=usuario&senha=qwerty
+        console.log('meu id ==> ', id);
+        console.log('path ==> ', path);
+        let data = {id: id, path: path};
+
+        $.ajax({
+            type: 'POST',
+            url: '../sources/saveDoc.php',
+            data: data,
+            success: function(response) {
+                console.log('======>>', response);
+                var resposta = JSON.parse(response);
+                if (resposta.codigo == 1) {
+                    $("#mensagem").html('<strong>Sucesso! </strong>' + resposta.mensagem);
+                } else {
+                    $("#mensagem").html('<strong>Erro! </strong>' + resposta.mensagem);
+                }
+            }
+        });
+
+    }
+
+
     $("#btnUploadFile").click(function () {
         var file_data = $('#uploadedFile').prop('files')[0];
+        var id = $('input[name="patNumber"]').val();
+        // console.log('id ===> ', id);
         var form_data = new FormData();                  
         form_data.append('file', file_data);
 
@@ -56,16 +82,22 @@ $('document').ready(function () {
             },
             success: function (response) {
                 console.log('response >> ', response);
+                let resposta = JSON.parse(response);
+                console.log('response 2 >> ', resposta.codigo);
+                let path = resposta.path.split('..');
+                saveDoc(id, path[1]);
                 $("#btnUploadFile").html('Upload');
                 $('#uploadedFile').val('');
-                if (response.codigo == "1") {
+                if (resposta.codigo == 1) {
                     // $("#btn-login").html('Entrar');
                     // $("#login-alert").css('display', 'none')
+                    console.log('sucesso', resposta.mensagem);
+                    // $("#mensagem").html('<strong>Sucesso! </strong>' + resposta.mensagem);
+                    
                 } else {
                     console.log('else click login');
                     $("#btnUploadFile").html('Upload');
-                    $("#login-alert").css('display', 'block')
-                    $("#mensagem").html('<strong>Erro! </strong>' + response.mensagem);
+                    $("#mensagem").html('<strong>Erro! </strong>' + resposta.mensagem);
                 }
             }
         });

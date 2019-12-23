@@ -37,9 +37,11 @@ verificaSessao();
         <link href="../build/css/default.min.css" rel="stylesheet" type="text/css"/>
         <!-- Adicionando JQuery -->
         <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script> -->
         <link href="../build/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+        
+        <link href="../build/css/utils.css" rel="stylesheet" type="text/css"/>
 
         <script src="../build/js/sceditor.min.js" type="text/javascript"></script>
         <script src="../build/js/icons/monocons.js" type="text/javascript"></script>

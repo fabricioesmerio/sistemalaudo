@@ -8,6 +8,11 @@
                     <li><a href="index.php">Página Inicial</a></li>
                 </ul>
             </li>
+            <li><a><i class="fa fa-users"></i> Usuário <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="newUser.php"> <i class="fa fa-user-plus"></i> Novo</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

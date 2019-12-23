@@ -8,12 +8,10 @@ class UsuarioDAO {
         $pdo = connectdb();
         $pdo->beginTransaction();
         try {
-            $stm = $pdo->prepare("INSERT INTO usuario (nome, login, pass, nivelAcesso, statusUsuario)VALUES (:nome, :login, :pass, :nivel, :status)");
-            $stm->bindValue(":nome", $u->getNome());
+            $stm = $pdo->prepare("INSERT INTO public.login(login, cryptsenha, bloqueado) VALUES (:login, :cryp, :bloq);");
             $stm->bindValue(":login", $u->getLogin());
-            $stm->bindValue(":pass", $u->getPass());
-            $stm->bindValue(":nivel", $u->getNivelAcesso());
-            $stm->bindValue(":status", $u->getStatus());
+            $stm->bindValue(":cryp", $u->getPass());
+            $stm->bindValue(":bloq", $u->getBloqueado(), PDO::PARAM_BOOL);
             $stm->execute();
             if ($stm->rowCount() >= 1) {
                 $pdo->commit();

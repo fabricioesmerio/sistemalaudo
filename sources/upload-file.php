@@ -1,5 +1,7 @@
 <?php
 
+//  https://www.youtube.com/watch?v=ut-NcYgFRKI
+
 require_once '../DAO/DocPacienteDAO.php';
 require_once '../class/DocPaciente.php';
 
@@ -37,7 +39,11 @@ if (0 < $_FILES['file']['error']) {
                 exit();
             }
         
-            echo $message;
+            // echo $message;
+        } else {
+            $retorno = array('codigo' => 0, 'mensagem' => 'Extenção do arquivo não permitida.');
+            echo json_encode($retorno);
+            exit();
         }
 }
 

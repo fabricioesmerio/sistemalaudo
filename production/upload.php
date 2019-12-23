@@ -10,6 +10,11 @@ require_once '../DAO/DocPacienteDAO.php';
 if(isset($_GET['patNumber'])) {
     $idPatient = $_GET['patNumber'];
 
+    $doc = new DocPaciente();
+    $docDAO = new DocPacienteDAO();
+    $list = $docDAO->getById($idPatient);
+    
+
 ?>
 
 <div class="container">
@@ -22,10 +27,16 @@ if(isset($_GET['patNumber'])) {
     </div>
  
     <button type="submit" name="uploadBtn" id="btnUploadFile" >Upload</button>
+    <div id="mensagem"></div>
   <!-- </form> -->
 
   <?php
 
+if (!empty($list)) {
+    foreach ($list as $obj) {
+        echo $obj->getArquivo();
+    }
+}
 // if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {
 //     $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
 //     $fileName = $_FILES['uploadedFile']['name'];
@@ -72,18 +83,25 @@ if(isset($_GET['patNumber'])) {
 </div>
 
 <?php
+include 'footer.php';
 } else {
     ?>
-<div class="container">
+<div class="container" onload="redir()">
     <div class="right_col" role="main">
-        <span>Entrada inválida!. Volte para a lista e selecione um registro.</span>
+        <span>Entrada inválida!. Você será redirecionado à lista...</span>
     </div>
 </div>
     <?php
-}
-
-?>
+    include 'footer.php';
+    ?>
+<script>
+    jQuery(document).ready(function() {
+		window.location.href = "index.php";
+	});
+</script>
 
 <?php
-include 'footer.php';
+}
+?>
+
 
