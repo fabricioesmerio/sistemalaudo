@@ -11,8 +11,58 @@ require_once '../DAO/StudyDAO.php';
 <!-- page content -->
 <div class="container">
     <div class="right_col" role="main">
-        <div class="">
-            <table id="studyList" class="display" style="width:100%">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-2 col-md-pull-2"></div>
+                <div class="col-md-1 col-md-pull-1 col-xs-3 p-4 w-92">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn btn-info">
+                            Hoje
+                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-1 col-md-pull-1 col-xs-3 p-4 w-110">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn btn-info">
+                            Ontem
+                            <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-1 col-md-pull-1 col-xs-3 p-4 w-110">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn btn-info">
+                            7 Dias
+                            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-1 col-md-pull-1 col-xs-3 p-4 w-110">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn btn-info">
+                            30 Dias
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-1 col-md-pull-1 col-xs-3 p-4 w-110">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn btn-info">
+                            Todos
+                            <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-md-push-2"></div>
+        </div>
+        <?php
+            echo dirname(realpath('.'), 1);
+        ?>
+        <div class="table-responsive">
+            <table id="studyList" class="table display" style="width:100%">
                 <thead>
                     <tr>
                         <th>Código</th>

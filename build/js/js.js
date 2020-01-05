@@ -42,13 +42,13 @@ $('document').ready(function () {
             url: '../sources/saveDoc.php',
             data: data,
             success: function(response) {
-                console.log('======>>', response);
-                var resposta = JSON.parse(response);
-                if (resposta.codigo == 1) {
-                    $("#mensagem").html('<strong>Sucesso! </strong>' + resposta.mensagem);
-                } else {
-                    $("#mensagem").html('<strong>Erro! </strong>' + resposta.mensagem);
-                }
+                console.log('======>>', JSON.parse(response));
+                // var resposta = JSON.parse(response);
+                // if (resposta.codigo == 1) {
+                //     $("#mensagem").html('<strong>Sucesso! </strong>' + resposta.mensagem);
+                // } else {
+                //     $("#mensagem").html('<strong>Erro! </strong>' + resposta.mensagem);
+                // }
             }
         });
 
