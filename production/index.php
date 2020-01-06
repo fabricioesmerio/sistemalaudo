@@ -58,9 +58,7 @@ require_once '../DAO/StudyDAO.php';
             </div>
             <div class="col-md-2 col-md-push-2"></div>
         </div>
-        <?php
-            echo dirname(realpath('.'), 1);
-        ?>
+        
         <div class="table-responsive">
             <table id="studyList" class="table display" style="width:100%">
                 <thead>

@@ -3,7 +3,7 @@
 <!-- footer content -->
 <footer>
     <div class="pull-right">
-        Sistema de Controle de Segurados &copy <?= date("Y"); ?> - Desenvolvido por <a href="#">Fabrício Esmério</a>
+        &copy <?= date("Y"); ?> - Desenvolvido por <a href="#">Fabrício Esmério</a>
     </div>
     <div class="clearfix"></div>
 </footer>

@@ -44,7 +44,7 @@ require_once '../class/Usuario.php';
                         if (filter_input(INPUT_POST, 'usuario') !== '' || filter_input(INPUT_POST, 'senha') !== '') {
                             $usuario = new Usuario();
                             $usuario->setLogin(addslashes(filter_input(INPUT_POST, 'usuario')));
-                            $usuario->setPass(addslashes(filter_input(INPUT_POST, 'senha')));
+                            $usuario->setPass(md5(addslashes(filter_input(INPUT_POST, 'senha'))));
                             if (isset($_POST['bloqueado']) && filter_input(INPUT_POST, 'bloqueado') !== 'on') {
                                 $usuario->setBloqueado(true);
                             } else {
@@ -58,47 +58,11 @@ require_once '../class/Usuario.php';
                                 echo '<div class="alert alert-danger" role="alert">Ocorreu um erro ao salvar.</div>';
                             }
                         }
-                        echo "<br /><pre><span>";
-                        var_dump($_POST);
-                        echo "</span></pre>";
                     }
                   ?>
             </div>
         </div>
     </div>
-    <!-- <div class="right_col" role="main">
-
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                </div>
-
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Recipient's username"
-                        aria-describedby="basic-addon2">
-                    <span class="input-group-addon" id="basic-addon2">@example.com</span>
-                </div>
-
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-addon">.00</span>
-                </div>
-
-                <label for="basic-url">Your vanity URL</label>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon3">https://example.com/users/</span>
-                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                </div>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
-
-
-    </div> -->
 </div>
 
 
