@@ -13,6 +13,11 @@
                     <li><a href="newUser.php"> <i class="fa fa-user-plus"></i> Novo</a></li>
                 </ul>
             </li>
+            <li><a><i class="fa fa-mobile"></i> Mobile <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="http://localhost/iOviyam2/patient.html"> <i class="fa fa-share" aria-hidden="true"></i>Acessar</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

@@ -140,10 +140,16 @@ if(isset($_GET['patNumber'])) {
                                 echo '<span class="glyphicon glyphicon glyphicon-file" aria-hidden="true"></span>';
                             }
                          ?></td>
-                        <td><a href="javascript:MyFunction(this, '<?php echo $obj->getArquivo(); ?>', false);" >Ver</a></td>
-                        <td>
+                        <!-- <td><a href="javascript:MyFunction(this, '<?php echo $obj->getArquivo(); ?>', false);" >Ver</a></td> -->
+                        <td><a href="..<?php echo $obj->getArquivo();?>" target="_blank">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        </a></td>
+                        <!-- <td>
                             <a href="javascript:MyFunction(this, '<?php echo $obj->getArquivo(); ?>', true);" >Baixar</a>
-                        </td>
+                        </td> -->
+                        <td><a href="..<?php echo $obj->getArquivo();?>" download>
+                            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                        </a></td>
                         <!-- <td><?php echo dirname(__FILE__) .''. $obj->getArquivo();?></td> -->
                     </tr>
                     <?php
