@@ -18,15 +18,27 @@ input:-webkit-autofill {
 
 .upload-file {
   padding-top: 4px;
-    padding-bottom: 4px;
-    margin-top: 75px;
-    border: 1px solid #ddd;
-    padding: 15px;
-    box-shadow: 2px 3px 7px -2px rgba(0,0,0,0.3);
+  padding-bottom: 4px;
+  margin-top: 75px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  box-shadow: 2px 3px 7px -2px rgba(0,0,0,0.3);
 }
 
 .upload-file input[type="file"] {
   padding: 8px 0px;
+}
+
+.box-title {
+  background: #f7f7f7;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  width: 100px;
+  text-align: center;
+  position: absolute;
+  top: 2px;
+  left: 10px;
+  padding: 2px;
 }
 
 .p-4 {
@@ -37,7 +49,7 @@ input:-webkit-autofill {
   padding: 0px 18px !important;
 }
 
-
+/**  WIDTH */
 .w-92 {
   max-width: 92px;
 }
@@ -45,4 +57,145 @@ input:-webkit-autofill {
 .w-110 {
   max-width: 110px;
   width: 110px;
+}
+
+.w-100-p {
+  width: 100%;
+}
+
+/**    FLEX     */
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-4 {
+  flex: 4;
+}
+
+.flex-5 {
+  flex: 5;
+}
+
+.flex-6 {
+  flex: 6;
+}
+
+
+.flex-w-10p { max-width: 10%; width: 10%;}
+.flex-w-15p { max-width: 15%; width: 15%;}
+.flex-w-20p { max-width: 20%; width: 20%;}
+.flex-w-25p { max-width: 25%; width: 25%;}
+.flex-w-30p { max-width: 30%; width: 30%;}
+.flex-w-35p { max-width: 35%; width: 35%;}
+.flex-w-40p { max-width: 40%; width: 40%;}
+.flex-w-45p { max-width: 45%; width: 45%;}
+.flex-w-50p { max-width: 50%; width: 50%;}
+.flex-w-55p { max-width: 55%; width: 55%;}
+.flex-w-60p { max-width: 60%; width: 60%;}
+.flex-w-65p { max-width: 65%; width: 65%;}
+.flex-w-70p { max-width: 70%; width: 70%;}
+.flex-w-75p { max-width: 75%; width: 75%;}
+.flex-w-80p { max-width: 80%; width: 80%;}
+.flex-w-85p { max-width: 85%; width: 85%;}
+.flex-w-90p { max-width: 90%; width: 90%;}
+.flex-w-95p { max-width: 95%; width: 95%;}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+
+/**   MARGINS   */
+.mt-4 {
+  margin-top: 4px;
+}
+.mt-8 {
+  margin-top: 8px;
+}
+.mt-12 {
+  margin-top: 12px;
+}
+.mt-16 {
+  margin-top: 16px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+
+.ml-4 {
+  margin-left: 4px;
+}
+.ml-8 {
+  margin-left: 8px;
+}
+.ml-12 {
+  margin-left: 12px;
+}
+.ml-16 {
+  margin-left: 16px;
+}
+.ml-20 {
+  margin-left: 20px;
+}
+
+.mr-4 {
+  margin-right: 4px;
+}
+.mr-8 {
+  margin-right: 8px;
+}
+.mr-12 {
+  margin-right: 12px;
+}
+.mr-16 {
+  margin-right: 16px;
+}
+.mr-20 {
+  margin-right: 20px;
+}
+
+
+/** UTILS */
+
+.display-inline {
+  display: inline;
+}
+
+/** ****** CUSTOM FIELD ***** */
+.c-field {
+  height: 20px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 2px 8px;
 }

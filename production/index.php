@@ -92,9 +92,9 @@ require_once '../DAO/StudyDAO.php';
                                     aria-hidden="true"></i></a>
                             <a href="upload.php?patNumber=<?= $obj->getPatient_fk() ?>" title="Upload de arquivos"><i
                                     class="fa fa-upload" aria-hidden="true"></i></a>
-                            <a href="#" onclick="alert('Em desenvolvimento!')" title="Digitar Laudo"><i
+                            <a href="w_laudo.php?stuNumber=<?= $obj->getPk() ?>" title="Digitar Laudo"><i
                                     class="fa fa-newspaper-o" aria-hidden="true"></i></a>
-                            <a href="#" onclick="alert('Em desenvolvimento!')" title="Gravar áudio"><i
+                            <a href="r_audio.php?stuNumber=<?= $obj->getPk() ?>" title="Gravar áudio"><i
                                     class="fa fa-microphone" aria-hidden="true"></i></a>
                         </td>
                         <?php

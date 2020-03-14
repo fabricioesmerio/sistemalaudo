@@ -6,7 +6,7 @@ date_default_timezone_set('America/Sao_Paulo');
 function connectdb() {
 
 
-    $dns = "pgsql:host=" . HOST . ";dbname=" . NAMEDB;
+    $dns = "pgsql:host=" . HOST . ";port=". PORT . " dbname=" . NAMEDB;
     $opcoes = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
     try {
         $conexao = new PDO($dns, USER, PASS, $opcoes);

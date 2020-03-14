@@ -25,6 +25,27 @@ class DocPacienteDAO {
             die();
         }
     }
+    
+    public function save2(DocPaciente $obj) {
+        $pdo = connectdb();
+        $pdo->beginTransaction();
+        try {
+            $stmt = $pdo->prepare('INSERT INTO public.doc_paciente(id_paciente, arquivo) VALUES (:id_paciente, :arquivo) ');
+            $stmt->bindValue(':id_paciente', $obj->getId_paciente(), PDO::PARAM_INT);
+            $stmt->bindValue(':arquivo', $obj->getArquivo(), PDO::PARAM_LOB);
+            $stmt->execute();
+            if ($stmt->rowCount()) {
+                $pdo->commit();
+                return true;
+            }
+            $pdo->rollBack();
+            return false;
+        } catch (PDOException $e) {
+            echo 'Erro ao salvar o documento. <br />. Mensagem: '. $e->getMessage();
+            $pdo->rollBack();
+            die();
+        }
+    }
 
     public function getAll() {
         $pdo = connectdb();
