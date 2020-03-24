@@ -15,7 +15,7 @@ $("#btn-login").click(function () {
     pass.val(calcMD5(pass.val()));
 
     var data = $("#login-form").serialize();
-    $("#login-form").trigger("reset");
+    //$("#login-form").trigger("reset");
 
     $.ajax({
         type: 'POST',
@@ -31,6 +31,7 @@ $("#btn-login").click(function () {
             if (response.codigo == "1") {
                 $("#btn-login").html('Entrar');
                 toastr.success('Login efetuado com sucesso', 'Sucesso!');
+                $("#login-form").trigger("reset");
                 setTimeout(() => {
                     $("#login-alert").css('display', 'none')
                     $("#mensagem").html('');

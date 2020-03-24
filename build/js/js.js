@@ -115,3 +115,27 @@ $(document).ready(function() {
     });
     $.fn.dataTable.moment( 'DD/MM/YYYY HH:mm:ss' );
 } );
+
+function filterDate(filter) {
+    let day = dayjs();
+    if (filter) {
+        switch (filter) {
+            case 'today':
+                document.location.assign(`index.php?period=${day.format('YYYY-MM-DD')}`);
+                break;
+            case 'yesterday':
+                document.location.assign(`index.php?period=${day.subtract(1, 'day').format('YYYY-MM-DD')}`);
+                break;
+            case 'lastWeek':
+                document.location.assign(`index.php?period=${day.subtract(7, 'day').format('YYYY-MM-DD')}`);
+                break;
+            case 'lastMonth':
+                document.location.assign(`index.php?period=${day.subtract(1, 'month').format('YYYY-MM-DD')}`);
+                break;
+        
+            default:
+                break;
+        }
+    }
+    console.log('filtrar', day.format('YYYY-MM-DD'));
+}

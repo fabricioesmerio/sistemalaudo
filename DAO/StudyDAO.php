@@ -4,13 +4,15 @@ require_once '../class/Study.php';
 
 
 class StudyDAO {
-    public function getListStudy() {
+    public function getListStudy($term, $limit, $offset) {
         $pdo = connectdb();
         try {
             $stm = $pdo->prepare('SELECT public.study.pk, public.study.patient_fk, public.study.study_datetime, public.study.accession_no, 
             public.study.study_desc, public.study.laudo_audio, public.study.laudo_texto, public.patient.pat_name AS NomePaciente
-                FROM public.study, public.patient
-                WHERE public.study.patient_fk = public.patient.pk');
+                FROM public.study
+                JOIN public.patient ON public.patient.pk = public.study.patient_fk
+                LIMIT '. $limit);
+                // SELECT * FROM tabela Where data_entrevista::date >= CURRENT_DATE
             $stm->execute();
             if ($stm->rowCount() >= 1) {
                 $obj = new Study();
@@ -31,6 +33,23 @@ class StudyDAO {
         } catch (PDOException $e) {
             echo 'Erro ao buscar. <br /> Mensagem: '. $e->getMessage();
             die();
+        }
+    }
+
+    public function getCountTotal() {
+        $pdo = connectdb();
+        try {
+            $stmt = $pdo->prepare('SELECT COUNT(pk) AS TOTAL FROM public.study');
+            $stmt->execute();
+            $count = 0;
+            if ($stmt->rowCount()) {
+                while($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $count = $rs->total;
+                }
+            }
+            return $count;
+        } catch (PDOException $e) {
+            echo 'Erro ao buscar o contador. <br /> Mensagem: '. $e->getMessage();
         }
     }
     
