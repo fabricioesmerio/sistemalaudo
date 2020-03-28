@@ -13,6 +13,7 @@
 
 <!-- jQuery -->
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <!-- Meu JavaScript-->
 <script src="../build/js/jquery-ui.min.js" type="text/javascript"></script>
 <!-- JS DO DATATABLE-->

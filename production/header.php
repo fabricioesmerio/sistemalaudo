@@ -44,6 +44,7 @@ verificaSessao();
         <link href="../build/css/utils.css" rel="stylesheet" type="text/css"/>
 
         <script src="../build/js/sceditor.min.js" type="text/javascript"></script>
+        <script src="//cdn.ckeditor.com/4.13.1/basic/ckeditor.js"></script>
         <script src="../build/js/icons/monocons.js" type="text/javascript"></script>
         <script src="../build/js/formats/bbcode.js" type="text/javascript"></script>
     </head>

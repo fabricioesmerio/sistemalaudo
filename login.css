@@ -1,0 +1,105 @@
+body {
+    position: relative;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    height: 100vh;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.bg {
+    background-color: #45454a;
+}
+
+.selector {
+    height: 250px;
+    width: 465px;
+    background-color: rgba(255,255,255,0.15);;
+    border-radius: 2px;
+    box-shadow: 4px 5px 9px rgba(0,0,0,.2), 0px -3px 9px rgba(0,0,0,.2);
+    animation: fadein 3s;
+}
+
+.selector-title {
+    justify-content: center;
+    font-size: 1.5em;
+    padding: 8px;
+    color: white;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+.selector-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.selector-content .fa {
+    font-size: 8em;
+    color: #ccc;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.selector-content p {
+    margin: 0;
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.selector-content .fa:hover {
+    box-shadow: 2px 4px 11px -1px rgba(0,0,0,.25);
+}
+
+.selector-content .fa:active {
+    color: yellow;
+}
+
+.selector-content p:hover {
+    text-decoration: underline;
+}
+
+.selector-content p:active {
+    color: yellow;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.loading {
+    position: absolute;
+    z-index: 999999;
+    background-color: teal;
+}

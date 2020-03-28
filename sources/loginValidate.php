@@ -23,7 +23,8 @@ if (empty($senha)) {
 
 $user = new Usuario();
 $userDAO = new UsuarioDAO();
-$user = $userDAO->signIn($login, md5($senha));
+$user = $userDAO->signIn($login, $senha);
+// $user = $userDAO->signIn($login, md5($senha));
 if ($user != NULL) {
     // if ($user->getStatus() != 1) {
     //     $retorno = array('codigo' => 0, 'mensagem' => 'Usuário sem permissão para acessar o sistema!');

@@ -1,7 +1,21 @@
 $("#btn-login").click(function () {
-    var data = $("#login-form").serialize();
+    var user = $("#login-form").find('input[name="login"]');
+    var pass = $("#login-form").find('input[name="senha"]');
 
-    console.log('data serialize ==>', typeof(data));
+    if (!user.val()) {
+        toastr.warning('Informe o campo Usuário', 'Atenção!');
+        user.focus();
+        return 0;
+    } else if (!pass.val()) {
+        toastr.warning('Informe o campo Senha', 'Atenção!');
+        pass.focus();
+        return 0;
+    }
+
+    pass.val(calcMD5(pass.val()));
+
+    var data = $("#login-form").serialize();
+    //$("#login-form").trigger("reset");
 
     $.ajax({
         type: 'POST',
@@ -16,23 +30,17 @@ $("#btn-login").click(function () {
             console.log('response >> ', response);
             if (response.codigo == "1") {
                 $("#btn-login").html('Entrar');
-                $("#login-alert").removeClass('alert-danger');
-                $("#login-alert").find('span').first().removeClass('glyphicon-exclamation-sign');
-                $("#login-alert").find('span').first().addClass('glyphicon-ok-sign');
-                //glyphicon-ok
-                $("#login-alert").addClass('alert-info');
-                $("#login-alert").css('display', 'block')
-                $("#mensagem").html('<strong>Sucesso! '+ response.mensagem +'</strong><br />Redirecionando...');
+                toastr.success('Login efetuado com sucesso', 'Sucesso!');
+                $("#login-form").trigger("reset");
                 setTimeout(() => {
                     $("#login-alert").css('display', 'none')
                     $("#mensagem").html('');
                     window.location.href = "production/index.php";
-                }, 2000);
+                }, 1500);
             } else {
-                console.log('else click login');
+                toastr.error(response.mensagem, 'Ops!');
+                $("#login-form").trigger("reset");
                 $("#btn-login").html('Entrar');
-                $("#login-alert").css('display', 'block')
-                $("#mensagem").html('<strong>Erro! </strong>' + response.mensagem);
             }
         }
     });

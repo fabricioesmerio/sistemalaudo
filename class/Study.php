@@ -9,6 +9,7 @@ class Study {
     private $mods_in_study;
     private $laudo_audio;
     private $laudo_texto;
+    private $finaliza_laudo;
     private $nomepaciente; /** guarda o nome do paciente nas consultas */
 
     public function getPk(){
@@ -73,6 +74,14 @@ class Study {
 
 	public function setLaudo_texto($laudo_texto){
 		$this->laudo_texto = $laudo_texto;
+	}
+	
+	public function getFinaliza_laudo(){
+		return $this->finaliza_laudo;
+	}
+
+	public function setFinaliza_laudo($finaliza_laudo){
+		$this->finaliza_laudo = $finaliza_laudo;
 	}
 	
 	public function getNomePaciene(){

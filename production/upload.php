@@ -31,8 +31,13 @@ if(isset($_GET['patNumber'])) {
                 $fileName = $_FILES['uploadedFile']['name'];
                 $fileSize = $_FILES['uploadedFile']['size'];
                 $fileType = $_FILES['uploadedFile']['type'];
+                $filefp = fopen($_FILES['uploadedFile']['tmp_name'], 'rb');
                 $fileNameCmps = explode(".", $fileName);
                 $fileExtension = strtolower(end($fileNameCmps));
+
+                $newDoc->setArquivo($filefp);
+                $newDoc->setId_paciente($idPatient);
+                $newDocDAO->save2($newDoc);
 
                 $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
 
