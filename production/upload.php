@@ -95,7 +95,8 @@ if(isset($_GET['patNumber'])) {
         <form method="POST" action="upload.php?patNumber=<?= $idPatient?>" id="formUploadFile" enctype="multipart/form-data">
         <div class="upload-file">
             <h2>Adicionar arquivo</h2>
-            <input type="file" id="uploadedFile" name="uploadedFile" />
+			<input type="file" onchange="encodeImageFileAsURL(this)" />
+            <!-- <input type="file" id="uploadedFile" name="uploadedFile" /> -->
             <input type="hidden" name="patNumber" value="<?= $idPatient?>">
             <button type="submit" name="uploadBtn2" class="btn btn-primary" id="btnUploadFile2" disabled>Upload</button>
         </div>
@@ -128,6 +129,7 @@ if(isset($_GET['patNumber'])) {
                 <tbody>
                     <?php
                     if (!empty($list)) {
+						var_dump($list);
                         foreach ($list as $obj) {
                     ?>
                     <tr>
@@ -140,17 +142,12 @@ if(isset($_GET['patNumber'])) {
                                 echo '<span class="glyphicon glyphicon glyphicon-file" aria-hidden="true"></span>';
                             }
                          ?></td>
-                        <!-- <td><a href="javascript:MyFunction(this, '<?php echo $obj->getArquivo(); ?>', false);" >Ver</a></td> -->
                         <td><a href="..<?php echo $obj->getArquivo();?>" target="_blank">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         </a></td>
-                        <!-- <td>
-                            <a href="javascript:MyFunction(this, '<?php echo $obj->getArquivo(); ?>', true);" >Baixar</a>
-                        </td> -->
                         <td><a href="..<?php echo $obj->getArquivo();?>" download>
                             <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
                         </a></td>
-                        <!-- <td><?php echo dirname(__FILE__) .''. $obj->getArquivo();?></td> -->
                     </tr>
                     <?php
                     }
@@ -192,6 +189,15 @@ if(isset($_GET['patNumber'])) {
             document.body.removeChild(a);
         }
     }
+
+	function encodeImageFileAsURL(element) {
+		var file = element.files[0];
+		var reader = new FileReader();
+		reader.onloadend = function() {
+			console.log('RESULT', reader.result)
+		}
+		reader.readAsDataURL(file);
+	}
 </script>
 
 <?php
