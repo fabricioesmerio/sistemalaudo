@@ -139,3 +139,7 @@ function filterDate(filter) {
     }
     console.log('filtrar', day.format('YYYY-MM-DD'));
 }
+
+function meuTeste123() {
+	console.log('Eiiiita deu certo');
+}

@@ -32,6 +32,7 @@ verificaSessao();
         <!-- DATATABLE CSS-->
         <!-- <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/> -->
         <link href="//datatables.net/download/build/nightly/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css" />
 
         <link href="../build/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="../build/css/default.min.css" rel="stylesheet" type="text/css"/>

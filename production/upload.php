@@ -99,7 +99,7 @@ if(isset($_GET['patNumber'])) {
     <div class="right_col" role="main">
         <form method="POST" action="upload.php?patNumber=<?= $idPatient?>" id="formUploadFile" enctype="multipart/form-data">
         <div class="upload-file">
-            <h2>Adicionar arquivo</h2>
+            <h2>Upload de Documentos</h2>
 			<input type="file" onchange="encodeImageFileAsURL(this)" />
             <!-- <input type="file" id="uploadedFile" name="uploadedFile" /> -->
             <input type="hidden" name="patNumber" value="<?= $idPatient?>">

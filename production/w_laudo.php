@@ -19,19 +19,9 @@ if(isset($_GET['stuNumber'])) {
             $study->setFinaliza_laudo($finLaudo);
            
             if ($studyDAO->saveLaudo($study)) {
-                $_SESSION['sucesso'] = '
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Sucesso!</strong> Laudo salvo com sucesso!
-                </div>
-                ';
+				$_SESSION['showMessage'] = 'success';
             } else {
-                $_SESSION['erro'] = '
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Erro!</strong> Ocorreu um erro ao salvar o laudo.
-                </div>
-                ';
+				$_SESSION['showMessage'] = 'error';
             }
         }
 
@@ -58,18 +48,6 @@ if(isset($_GET['stuNumber'])) {
                     <div class="flex-5 c-field"> <?= date('d/m/Y H:i', strtotime($study->getStudy_datetime())) ?> </div>
                 </div>
             </div>
-            <div style="margin-top: 12px; width: 300px;">
-
-                <?php
-                     if (isset($_SESSION['sucesso'])) {
-                        echo $_SESSION['sucesso'];
-                        unset($_SESSION['sucesso']);
-                    } elseif (isset($_SESSION['erro'])) {
-                        echo $_SESSION['erro'];
-                        unset($_SESSION['erro']);
-                    }
-            ?>
-            </div>
             <h2>Redigir Laudo</h2>
             <form action="w_laudo.php?stuNumber=<?= $idStudy?>" method="POST">
                 <textarea name="editorLaudo" id="editorLaudo">
@@ -89,7 +67,9 @@ if(isset($_GET['stuNumber'])) {
 <script>
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
-    CKEDITOR.replace( 'editorLaudo' );
+	CKEDITOR.replace( 'editorLaudo' );
+	
+	
 </script>
 
 
@@ -99,6 +79,27 @@ if(isset($_GET['stuNumber'])) {
 
 <?php
 include 'footer.php';
+
+?>
+<script>
+	<?php
+	if (isset($_SESSION['showMessage'])) {
+		switch ($_SESSION['showMessage']) {
+			case 'success': ?>
+				toastr.success('Registro salvo com sucesso.', 'Sucesso!');
+			<?php	break;
+			case 'error': ?>
+				toastr.error('Ocorreu um erro ao salvar.', 'Ops!');
+			<?php	break;
+			
+			default:
+				break;
+		}
+		unset($_SESSION['showMessage']);
+	}
+	?>
+</script>
+<?php
 } else {
     ?>
 <div class="container" onload="redir()">
