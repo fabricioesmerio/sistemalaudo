@@ -4,6 +4,8 @@ require_once 'sidebar.php';
 require_once 'navigation.php';
 require_once '../class/Study.php';
 require_once '../DAO/StudyDAO.php';
+require_once '../class/PatientArquivo.php';
+require_once '../DAO/PatientArquivoDAO.php';
 
 if(isset($_GET['stuNumber'])) {
     $idStudy = filter_input(INPUT_GET,'stuNumber', FILTER_SANITIZE_NUMBER_INT);
@@ -11,21 +13,31 @@ if(isset($_GET['stuNumber'])) {
         
         $study = new Study();
         $studyDAO = new StudyDAO();
-
+        $study = $studyDAO->getById($idStudy);
+        $patFile = new PatientArquivo();
+        $patFileDAO = new PatientArquivoDAO();
+        
         if (isset($_POST['save'])) {
-            $study->setPk($idStudy);
-            $study->setLaudo_texto(filter_input(INPUT_POST, 'editorLaudo'));
-            $finLaudo = (isset($_POST['finaliza_laudo']) && $_POST['finaliza_laudo'] == 'on') ? true : false;
-            $study->setFinaliza_laudo($finLaudo);
-           
-            if ($studyDAO->saveLaudo($study)) {
-				$_SESSION['showMessage'] = 'success';
+            $patFile = new PatientArquivo();
+            $name = $_FILES['file']['name'];
+            $type = $_FILES['file']['type'];
+            $size = $_FILES['file']['size'];
+            $data = fopen($_FILES['file']['tmp_name'], 'rb');;
+  
+
+     
+            
+            if ($patFileDAO->save($name, $type, $data, $size, $study->getPatient_fk()))  {
+                $_SESSION['showMessage'] = 'success';
             } else {
-				$_SESSION['showMessage'] = 'error';
+                $_SESSION['showMessage'] = 'error';
             }
         }
 
-        $study = $studyDAO->getById($idStudy);
+
+        $patFile = $patFileDAO->getByPatient($study->getPatient_fk());
+        // var_dump($patFile);
+
 
 ?>
 
@@ -49,13 +61,31 @@ if(isset($_GET['stuNumber'])) {
                 </div>
             </div>
             <h2>Importar Arquivos</h2>
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 
-                
+                <input type="file" name="file" id="file">
                 <div class="flex justify-end mt-4">
                     <button type="submit" name="save" class="btn btn-primary" style="margin-right: 0px">Salvar</button>
                 </div>
             </form>
+        <?php
+
+        // echo $patFile->getId();
+
+
+        
+        
+            if ($patFile) {
+                foreach ($patFile as $obj) { ?>
+                
+
+
+                <img src="viewImports.php?fileId=<?= $obj->getId(); ?>"/>
+                <?php 
+                }
+            }
+
+        ?>
         </div>
     </div>
 </div>

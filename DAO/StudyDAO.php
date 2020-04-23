@@ -161,10 +161,12 @@ class StudyDAO
     {
         $pdo = connectdb();
         try {
-            $stm = $pdo->prepare('SELECT public.study.pk, public.study.patient_fk, public.study.study_datetime, public.study.accession_no,
-            public.study.study_desc, public.study.laudo_audio, public.study.laudo_texto, public.study.finaliza_laudo, public.patient.pat_name AS NomePaciente
-                FROM public.study, public.patient
-                WHERE public.study.pk = :id');
+            $stm = $pdo->prepare('SELECT st.pk, st.patient_fk, st.study_datetime, st.accession_no,
+            st.study_desc, st.laudo_audio, st.laudo_texto, st.finaliza_laudo, pt.pat_name AS NomePaciente
+                FROM public.study st
+                JOIN public.patient pt
+                ON st.patient_fk = pt.pk
+                WHERE st.pk = :id');
             $stm->bindValue(':id', $id);
             $stm->execute();
             if ($stm->rowCount() >= 1) {
