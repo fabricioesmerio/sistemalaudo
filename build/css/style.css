@@ -32,6 +32,17 @@ input:-webkit-autofill {
 .box-title {
   background: #f7f7f7;
   border: 1px solid #d1d1d1;
+  /* border-radius: 10px; */
+  /* width: 100px; */
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: -10px;
+  padding: 2px;
+}
+/* .box-title {
+  background: #f7f7f7;
+  border: 1px solid #d1d1d1;
   border-radius: 10px;
   width: 100px;
   text-align: center;
@@ -39,7 +50,7 @@ input:-webkit-autofill {
   top: 2px;
   left: 10px;
   padding: 2px;
-}
+} */
 
 .p-4 {
   padding: 4px;
@@ -195,6 +206,7 @@ input:-webkit-autofill {
 /** ****** CUSTOM FIELD ***** */
 .c-field {
   height: 20px;
+  min-height: 20px;
   background-color: white;
   border-radius: 10px;
   padding: 2px 8px;

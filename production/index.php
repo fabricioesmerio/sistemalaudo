@@ -16,48 +16,48 @@ $term = '';
 $dbg = 0;
 $showLastAdjacent = true;
 if ($total) {
-    $pagination = ceil($total / $limit);
+	$pagination = ceil($total / $limit);
 }
 
 if (isset($_GET['page']) && $_GET['page'] != "") {
-    $page = $_GET['page'];
-    $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
-    $offset = $limit * ($page - 1);
+	$page = $_GET['page'];
+	$page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
+	$offset = $limit * ($page - 1);
 } else {
-    $page = 1;
-    $offset = 0;
+	$page = 1;
+	$offset = 0;
 }
 
 if ($total <= (1 + ($adjacents * 2))) {
-    $start = 1;
-    $end = $total;
-    $dbg = 33;
+	$start = 1;
+	$end = $total;
+	$dbg = 33;
 } else {
-    if (($page - $adjacents) > 1) {
-        if (($page + $adjacents) < $pagination) {
-            $start = ($page - $adjacents);
-            $end = ($page + $adjacents);
-            $dbg = 39;
-        } else {
-            $start = ($pagination - (($adjacents * 2)));
-            $end = $pagination;
-            $dbg = 43;
-        }
-    } else {
-        $start = 1;
-        $end = (1 + ($adjacents * 2));
-        $dbg = 48;
-    }
+	if (($page - $adjacents) > 1) {
+		if (($page + $adjacents) < $pagination) {
+			$start = ($page - $adjacents);
+			$end = ($page + $adjacents);
+			$dbg = 39;
+		} else {
+			$start = ($pagination - (($adjacents * 2)));
+			$end = $pagination;
+			$dbg = 43;
+		}
+	} else {
+		$start = 1;
+		$end = (1 + ($adjacents * 2));
+		$dbg = 48;
+	}
 }
 
 if (isset($_GET['term'])) {
-    $term = filter_input(INPUT_GET, 'term', FILTER_SANITIZE_STRING);
-    $study = $studyDAO->getListStudyTerm($term, $limit, null);
+	$term = filter_input(INPUT_GET, 'term', FILTER_SANITIZE_STRING);
+	$study = $studyDAO->getListStudyTerm($term, $limit, null);
 } elseif (isset($_GET['period'])) {
-    $term = filter_input(INPUT_GET, 'period', FILTER_SANITIZE_STRING);
-    $study = $studyDAO->getListStudyByDate($term);
+	$term = filter_input(INPUT_GET, 'period', FILTER_SANITIZE_STRING);
+	$study = $studyDAO->getListStudyByDate($term);
 } else {
-    $study = $studyDAO->getListStudy(null, $limit, $offset);
+	$study = $studyDAO->getListStudy(null, $limit, $offset);
 }
 ?>
 
@@ -71,7 +71,7 @@ if (isset($_GET['term'])) {
 				<!-- <div style="display: flex; flex-direction: column; flex: 1;"> -->
 				<form action="" method="GET">
 
-					<input type="text" name="term" placeholder="Pesquisar" value="<?=$term?>">
+					<input type="text" name="term" placeholder="Pesquisar" value="<?= $term ?>">
 					<button type="submit">
 						Pesquisar
 						<i class="fa fa-search" aria-hidden="true"></i>
@@ -181,74 +181,64 @@ if (isset($_GET['term'])) {
 					</thead>
 					<tbody>
 						<?php
-if ($study) {
+						if ($study) {
 
-    foreach ($study as $obj) {
-        ?>
-						<tr>
-							<td><?=$obj->getPk();?></td>
-							<td><?=str_replace(["^^^^"], "", $obj->getNomePaciene());?></td>
-							<td><span
-									class="hide"><?=$obj->getStudy_datetime()?></span><?=date('d/m/Y H:i', strtotime($obj->getStudy_datetime()))?>
-							</td>
-							<td><?=$obj->getStudy_desc()?></td>
-							<td class="controls">
-								<a href="http://179.124.242.194:8080/weasis-pacs-connector/weasis?accessionNumber=<?=$obj->getAccession_no();?>"
-									target="_blank" title="Abrir Weasis"><i class="fa fa-eye"
-										aria-hidden="true"></i></a>
-								<a href="http://179.124.242.194:8080/oviyam/oviyam?patientID=*&accessionNumber=<?=$obj->getAccession_no();?>"
-									target="_blank" title="Ver imagens"><i class="fa fa-object-group"
-										aria-hidden="true"></i></a>
-								<a href="import.php?stuNumber=<?=$obj->getPk()?>" title="Importar Arquivos"><i
-										class="fa fa-paperclip" aria-hidden="true"></i></a>
-								<a href="upload.php?patNumber=<?=$obj->getPatient_fk()?>" title="Upload de Documentos">
-									<i class="fa fa-upload" aria-hidden="true"></i></a>
-								<a href="w_laudo.php?stuNumber=<?=$obj->getPk()?>" title="Digitar Laudo"><i
-										class="fa fa-newspaper-o" aria-hidden="true"></i></a>
-								<a href="r_audio.php?stuNumber=<?=$obj->getPk()?>" title="Gravar áudio"><i
-										class="fa fa-microphone" aria-hidden="true"></i></a>
-							</td>
-							<?php
-}
-    ?>
-						</tr>
+							foreach ($study as $obj) {
+						?>
+								<tr>
+									<td><?= $obj->getPk(); ?></td>
+									<td><?= str_replace(["^^^^"], "", $obj->getNomePaciene()); ?></td>
+									<td><span class="hide"><?= $obj->getStudy_datetime() ?></span><?= date('d/m/Y H:i', strtotime($obj->getStudy_datetime())) ?>
+									</td>
+									<td><?= $obj->getStudy_desc() ?></td>
+									<td class="controls">
+										<a href="http://179.124.242.194:8080/weasis-pacs-connector/weasis?accessionNumber=<?= $obj->getAccession_no(); ?>" target="_blank" title="Abrir Weasis"><i class="fa fa-eye" aria-hidden="true"></i></a>
+										<a href="http://179.124.242.194:8080/oviyam/oviyam?patientID=*&accessionNumber=<?= $obj->getAccession_no(); ?>" target="_blank" title="Ver imagens"><i class="fa fa-object-group" aria-hidden="true"></i></a>
+										<a href="import.php?stuNumber=<?= $obj->getPk() ?>" title="Importar Arquivos"><i class="fa fa-paperclip" aria-hidden="true"></i></a>
+										<a href="w_laudo.php?stuNumber=<?= $obj->getPk() ?>" title="Digitar Laudo"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
+										<a href="r_audio.php?stuNumber=<?= $obj->getPk() ?>" title="Gravar áudio"><i class="fa fa-microphone" aria-hidden="true"></i></a>
+									</td>
+								<?php
+							}
+								?>
+								</tr>
 					</tbody>
 				</table>
 				<nav aria-label="Navegação dos registros">
 					<ul class="pagination">
 						<li class="page-item"><a class="page-link" href="index.php?page=1">Início</a></li>
 						<?php
-if ($page > 3 && $pagination > 5) {?>
-						<li class="page-item"><a class="page-link" href="#">...</a></li>
+							if ($page > 3 && $pagination > 5) { ?>
+							<li class="page-item"><a class="page-link" href="#">...</a></li>
 
 						<?php	}
-    ?>
+						?>
 						<?php
-for ($i = $start; $i <= $end; $i++) {?>
-						<li class="page-item"><a class="page-link" href="index.php?page=<?=$i;?>"><?=$i;?></a></li>
+							for ($i = $start; $i <= $end; $i++) { ?>
+							<li class="page-item"><a class="page-link" href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
 						<?php
-$showLastAdjacent = ($i == $pagination) ? false : true;
-    }
-    ?>
+								$showLastAdjacent = ($i == $pagination) ? false : true;
+							}
+						?>
 
 						<?php
-if ($showLastAdjacent) {?>
-						<li class="page-item"><a class="page-link" href="#">...</a></li>
+							if ($showLastAdjacent) { ?>
+							<li class="page-item"><a class="page-link" href="#">...</a></li>
 
 						<?php	}
-    ?>
-						<li class="page-item"><a class="page-link" href="index.php?page=<?=$pagination?>">Fim</a></li>
+						?>
+						<li class="page-item"><a class="page-link" href="index.php?page=<?= $pagination ?>">Fim</a></li>
 					</ul>
 				</nav>
-				<?php
-} else {
-    ?>
+			<?php
+						} else {
+			?>
 				<!-- <div style="height: 50px; width: 100%; background-color: red;">
 					Nenhum registro para mostrar.
 				</div> -->
-				<?php
-}
-?>
+			<?php
+						}
+			?>
 			</div>
 		</div>
 	</div>

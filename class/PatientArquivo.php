@@ -28,27 +28,27 @@ class PatientArquivo {
 	}
 
 	public function setConteudo($conteudo){
-		$this->$conteudo = $conteudo;
+		$this->conteudo = $conteudo;
 	}
     public function getTamanho(){
 		return $this->tamanho;
 	}
 
 	public function setTamanho($tamanho){
-		$this->$tamanho = $tamanho;
+		$this->tamanho = $tamanho;
 	}
     public function getPatientFk(){
 		return $this->patient_fk;
 	}
 
 	public function setPatientFk($patient_fk){
-		$this->$patient_fk = $patient_fk;
+		$this->patient_fk = $patient_fk;
 	}
     public function getMimeType(){
 		return $this->mime_type;
 	}
 
 	public function setMimeType($mime_type){
-		$this->$mime_type = $mime_type;
+		$this->mime_type = $mime_type;
 	}
 }
