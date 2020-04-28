@@ -4,7 +4,7 @@ require_once '../Config/functions.php';
 require_once '../DAO/UsuarioDAO.php';
 require_once '../class/Usuario.php';
 
-sleep(2);
+// sleep(2);
 
 $login = (isset($_POST['login']) ? addslashes(filter_input(INPUT_POST, 'login')) : '');
 $senha = (isset($_POST['senha']) ? addslashes(filter_input(INPUT_POST, 'senha')) : '');

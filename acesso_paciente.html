@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Font Awesome -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -32,14 +34,18 @@
                     <form id="login-form" method="POST" role="form">
                         <h1>Acesso do Paciente</h1>
                         <div>
-                            <input type="text" name="login" class="form-control" placeholder="Login" required=""
+                            <input type="text" name="login_paciente" class="form-control" placeholder="Login" required=""
                                 autofocus="" />
                         </div>
                         <div>
-                            <input type="password" name="senha" class="form-control" placeholder="Senha" required="" />
+                            <input type="password" name="senha_paciente" class="form-control" placeholder="Senha" required="" />
                         </div>
                         <div>
-                            <button class="btn btn-default submit" type="submit" id="btn-login">Acessar</button>
+                            <button class="btn btn-secondary" type="button" id="btn-login-paciente">
+                                Acessar
+                                <span class="spinner-border spinner-border-sm display-none" role="status" aria-hidden="true"></span>
+                            </button>
+                            <!-- <button class="btn btn-default submit" type="submit" id="btn-login">Acessar</button> -->
                         </div>
                     </form>
                     <div class="clearfix"></div>
