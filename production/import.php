@@ -25,13 +25,20 @@ if (isset($_GET['stuNumber'])) {
         $data = fopen($_FILES['file']['tmp_name'], 'rb');;
 
 
+        // $allowExtension = array("image/jpg", "image/gif", "image/png", "application/pdf", "application/vnd.ms-powerpoint");
+        $allowExtension = array("jpg", "jpeg", "gif", "png", "pdf", "doc", "docx", "calc", "xls", "xlsx", "odt", "sxw", "rtf");
 
-
-        if ($patFileDAO->save($name, $type, $data, $size, $study->getPatient_fk())) {
-            $_SESSION['showMessage'] = 'success';
+        if (!in_array(explode('.', $name)[1], $allowExtension)) {
+            $_SESSION['showMessage'] = 'deniedExtension';
         } else {
-            $_SESSION['showMessage'] = 'error';
+            if ($patFileDAO->save($name, $type, $data, $size, $study->getPatient_fk())) {
+                $_SESSION['showMessage'] = 'success';
+            } else {
+                $_SESSION['showMessage'] = 'error';
+            }
         }
+
+
     }
 
 
@@ -70,7 +77,7 @@ if (isset($_GET['stuNumber'])) {
                 
             </div>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="tableFile">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -88,9 +95,10 @@ if (isset($_GET['stuNumber'])) {
                                 echo '<tr>';
                                 echo '<td>'. $cod++ .'</td>';
                                 echo '<td>'. explode('.', $obj->getNome())[0] .'</td>';
-                                echo '<td>'. $obj->getTamanho() .'kB </td>';
+                                echo '<td>'. number_format($obj->getTamanho() / 1024, 2, ',', '') .'kB </td>';
                                 echo '<td>'. strtoupper(explode('/', $obj->getMimeType())[1])  .'</td>';
-                                echo '<td><a target="_blank" class="btn btn-info" href="viewImports.php?fileId='. $obj->getId() .'">Ver</a>  <a class="btn btn-danger" target="_blank" href="#">Excluir</a></td>';
+                                echo '<td><a target="_blank"  class="btn btn-info" href="viewImports.php?fileId='. $obj->getId() .'">Ver</a>  
+                                <a class="btn btn-danger" onclick="onDelete(this.parentNode.parentNode.rowIndex, '. $obj->getId() .')" href="#">Excluir</a></td>';
                                 echo '</tr>';
                             }
                         }
@@ -116,13 +124,44 @@ if (isset($_GET['stuNumber'])) {
                 case 'error': ?>
                     toastr.error('Ocorreu um erro ao salvar.', 'Ops!');
         <?php break;
-
+                case 'deniedExtension': ?>
+                toastr.error('Extensão do arquivo inválido.', 'Ops!');
+                <?php 
                 default:
                     break;
             }
             unset($_SESSION['showMessage']);
         }
         ?>
+
+    function onDelete(index, idElement) {
+        console.log('onDelete:: index', index);
+        console.log('onDelete:: idElement',idElement);
+        let _r = confirm('Realmente deseja excluir o arquivo?');
+        if (!_r) return;
+        var form = new FormData();
+        form.append('idFile', idElement);
+        fetch('deleteFile.php', {
+            method: 'POST',
+            body: form
+        })
+        .then(function(response) {
+            console.log('response then', response);
+            if (response.ok && response.status == 200) {
+                toastr.success('Registro excluído com sucesso.', 'Sucesso!');
+                deleteRow(index);
+            } else {
+                toastr.error('Ocorreu um erro ao excluir.', 'Ops!');
+            }
+        })
+        .catch(function (error) {
+            toastr.error('Ocorreu um erro ao excluir.', 'Ops!');
+        })
+    }
+
+    function deleteRow(index) {
+        document.getElementById('tableFile').deleteRow(index);
+    }
     </script>
 <?php
 } else {

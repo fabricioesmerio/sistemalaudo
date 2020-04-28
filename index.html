@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Faça Login Para Continuar | </title>
+    <title>Faça Login Para Continuar</title>
 
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,68 +19,77 @@
     <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- Animate.css -->
     <link href="vendors/animate.css/animate.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="build/css/custom.min.css" rel="stylesheet">
     <link href="login.css" rel="stylesheet">
-    <script type="text/javascript">
-
-    </script>
 
 </head>
 
-<body class="login">
-    <div>
-        <a class="hiddenanchor" id="signup"></a>
-        <a class="hiddenanchor" id="signin"></a>
-
-        <div class="login_wrapper">
-            <div class="container">
+<body>
+    <div id="container" class="bg justify-center align-center">
+        <div class="selector flex flex-column">
+            <div class="flex selector-title">
+                Informe seu perfil:
             </div>
-            <div class="clearfix"></div>
-            <div class="animate form login_form">
-                <section class="login_content">
-                    <form id="login-form" method="POST" role="form">
-                        <h1>Login</h1>
-                        <div>
-                            <input type="text" name="login" class="form-control" placeholder="Login" required=""
-                                autofocus="" />
-                        </div>
-                        <div>
-                            <input type="password" name="senha" class="form-control" placeholder="Senha" required="" />
-                        </div>
-                        <div>
-                            <button class="btn btn-default submit" type="submit" id="btn-login">Acessar</button>
-                        </div>
-                    </form>
-                    <div class="clearfix"></div>
-
-
-
-
-                    <div class="separator">
-
-                        <div class="clearfix"></div>
-                        <br />
-
-                        <div>
-
-                            <p>© <span id="year"></span> - Todos os Direitos Reservados. Desenvolvido por Fabrício
-                                Esmério. Tema: Gentelella Alela! </p>
-                        </div>
+            <div class="flex flex-1">
+                <div class="flex-1">
+                    <div onclick="redirLogin('med')" class="selector-content justify-center align-center">
+                        <i class="fa fa-user-md iconMedical" aria-hidden="true"></i>
+                        <p class="textMedical">Médico</p>
                     </div>
-                </section>
+                </div>
+                <div class="flex-1">
+                    <div onclick="redirLogin('pat')" class="selector-content justify-center align-center">
+                        <i class="fa fa-user iconPatient" aria-hidden="true"></i>
+                        <p class="textPatient">Paciente</p>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="loader display-none">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </div>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="md5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- <script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script> -->
-    <script src="main.js"></script>
+    <script src="login.js"></script>
     <script>
-        $('#year').text(new Date().getFullYear());
+
+        function redirLogin(option) {
+            var selector = $('.selector');
+            // var selector = document.getElementsByClassName('selector');
+            var loader = $('.loader');
+            switch (option) {
+                case 'med':
+                    console.log('selector', selector);
+                    console.log('loader', loader);
+                    selector.addClass("display-none");
+                    loader.removeClass('display-none');
+                    setTimeout(() => {
+                        window.location.href = "acesso_medico.html"
+                    }, 800);
+                    break;
+                case 'pat':
+                    selector.addClass("display-none");
+                    loader.removeClass('display-none');
+                    setTimeout(() => {
+                        window.location.href = "acesso_medico.html"
+                    }, 800);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+            //$('#year').text(new Date().getFullYear());
     </script>
 </body>
 

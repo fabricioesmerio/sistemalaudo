@@ -88,4 +88,34 @@ class PatientArquivoDAO {
             die();
         }
     }
+
+    public function delete($id)
+    {
+        $pdo = connectdb();
+        try {
+            $stm = $pdo->prepare('DELETE FROM public.patient_arquivo
+                                    WHERE id = :id');
+            $stm->bindValue(':id', $id, PDO::PARAM_INT);
+            $stm->execute();
+            return $stm->rowCount();
+            // if ($stm->rowCount() >= 1) {
+            //     $obj = new PatientArquivo();
+            //     $return = array();
+            //     while ($rs = $stm->fetch(PDO::FETCH_OBJ)) {
+            //         $obj->setId($rs->id);
+            //         $obj->setNome($rs->nome);
+            //         $obj->setTamanho($rs->tamanho);
+            //         $obj->setPatientFk($rs->patient_fk);
+            //         $obj->setMimeType($rs->mime_type);
+            //         // $obj->setConteudo($rs->conteudo);
+            //         $return[] = clone $obj;
+            //     }
+            //     return $return;
+            // }
+            // return null;
+        } catch (PDOException $e) {
+            echo 'Erro ao excluir. <br /> Mensagem: ' . $e->getMessage();
+            die();
+        }
+    }
 }

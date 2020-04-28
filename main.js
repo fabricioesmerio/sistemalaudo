@@ -12,24 +12,20 @@ $("#btn-login").click(function () {
         return 0;
     }
 
-    pass.val(calcMD5(pass.val()));
+    var newPass = calcMD5(pass.val());
 
-    var data = $("#login-form").serialize();
-    //$("#login-form").trigger("reset");
-
-    $.ajax({
-        type: 'POST',
-        url: 'sources/loginValidate.php',
-        data: data,
-        dataType: 'json',
-        beforeSend: function ()
-        {
-            $("#btn-login").html('Validando ...');
+    $("#btn-login").find('span').first().removeClass("display-none");
+    fetch('sources/loginValidate.php', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
         },
-        success: function (response) {
-            console.log('response >> ', response);
-            if (response.codigo == "1") {
-                $("#btn-login").html('Entrar');
+        body: `login=${user.val()}&senha=${newPass}`
+    })
+        .then(response => response.json())
+        .then(result => {
+            if (result.codigo == "1") {
+                $("#btn-login").find('span').first().addClass("display-none");
                 toastr.success('Login efetuado com sucesso', 'Sucesso!');
                 $("#login-form").trigger("reset");
                 setTimeout(() => {
@@ -38,11 +34,14 @@ $("#btn-login").click(function () {
                     window.location.href = "production/index.php";
                 }, 1500);
             } else {
-                toastr.error(response.mensagem, 'Ops!');
+                toastr.error(result.mensagem, 'Ops!');
                 $("#login-form").trigger("reset");
-                $("#btn-login").html('Entrar');
+                $("#btn-login").find('span').first().addClass("display-none");
             }
-        }
-    });
-    return false;
+        })
+        .catch(err => {
+            toastr.error(err, 'Erro!');
+            $("#login-form").trigger("reset");
+            $("#btn-login").find('span').first().addClass("display-none");
+        });
 });
