@@ -65,7 +65,7 @@ verificaSessao();
 
                             <div class="profile_info">
                                 <span>Bem-vindo,</span>
-                                <h2><?= $_SESSION['login']; ?></h2>
+                                <h2><?= $_SESSION['nomeUsuario']; ?></h2>
                             </div>
                         </div>
                         <!-- /menu profile quick info -->

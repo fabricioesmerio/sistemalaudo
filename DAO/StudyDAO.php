@@ -192,6 +192,41 @@ class StudyDAO
             die();
         }
     }
+    
+    
+    public function getByPatient($id)
+    {
+        $pdo = connectdb();
+        try {
+            $stm = $pdo->prepare('SELECT st.pk, st.patient_fk, st.study_datetime, st.accession_no,
+            st.study_desc, st.laudo_audio, st.laudo_texto, st.finaliza_laudo, pt.pat_name AS NomePaciente
+                FROM public.study st, st.patient_fk
+                WHERE st.patient_fk = :id');
+            $stm->bindValue(':id', $id);
+            $stm->execute();
+            if ($stm->rowCount()) {
+                $obj = new Study();
+                $return = array();
+                while ($rs = $stm->fetch(PDO::FETCH_OBJ)) {
+                    $obj->setPk($rs->pk);
+                    $obj->setPatient_fk($rs->patient_fk);
+                    $obj->setStudy_datetime($rs->study_datetime);
+                    $obj->setAccession_no($rs->accession_no);
+                    $obj->setStudy_desc($rs->study_desc);
+                    $obj->setLaudo_texto($rs->laudo_texto);
+                    $obj->setLaudo_audio($rs->laudo_audio);
+                    $obj->setNomePaciente($rs->nomepaciente);
+                    $obj->setFinaliza_laudo($rs->finaliza_laudo);
+                    $return[] = clone $obj;
+                }
+                return $return;
+            }
+            return null;
+        } catch (PDOException $e) {
+            echo 'Erro ao buscar. <br /> Mensagem: ' . $e->getMessage();
+            die();
+        }
+    }
 
     public function save(Study $obj)
     {

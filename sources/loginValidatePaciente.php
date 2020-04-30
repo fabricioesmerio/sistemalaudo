@@ -21,3 +21,15 @@ if (empty($senha)) {
 
 $patient = new Patient();
 $patientDAO = new PatientDAO();
+$patient = $patientDAO->auth($login, $senha);
+if ($patient) {
+    $_SESSION['id'] = $patient->getPk();
+    $_SESSION['nomeUsuario'] = $patient->getPat_nome();
+    $_SESSION['tipo'] = "Pat";
+    $retorno = array('codigo' => 1, 'mensagem' => 'Login efetuado com sucesso!');
+    echo json_encode($retorno);
+    exit();
+} else {
+    $retorno = array('codigo' => 0, 'mensagem' => 'O login falhou, verifique os dados e tente novamente!');
+    echo json_encode($retorno);
+}

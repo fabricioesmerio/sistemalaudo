@@ -32,7 +32,8 @@ if ($user != NULL) {
     //     exit();
     // }
     $_SESSION['id'] = $user->getId();
-    $_SESSION['login'] = $user->getLogin();
+    $_SESSION['nomeUsuario'] = $user->getLogin();
+    $_SESSION['tipo'] = "Med";
     $_SESSION['logado'] = TRUE;
     
     $retorno = array('codigo' => 1, 'mensagem' => 'Login efetuado com sucesso!');

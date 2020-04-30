@@ -17,11 +17,11 @@ class Patient {
 	}
 
 	public function getPat_nome(){
-		return $this->pat_nome;
+		return $this->pat_name;
 	}
 
-	public function setPat_nome($pat_nome){
-		$this->pat_nome = $pat_nome;
+	public function setPat_nome($pat_name){
+		$this->pat_name = $pat_name;
 	}
 
 	public function getPat_birthdate(){

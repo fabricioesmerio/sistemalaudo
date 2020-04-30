@@ -29,4 +29,26 @@ class PatientDAO {
         }
     }
 
+    public function auth($login, $senha) {
+        $pdo = connectdb();
+        try {
+            $stmt = $pdo->prepare('SELECT * FROM patient WHERE registro = :login AND password_web = :senha');
+            $stmt->bindValue(':login', $login);
+            $stmt->bindValue(':senha', $senha);
+            $stmt->execute();
+            if ($stmt->rowCount() == 1) {
+                $obj = new Patient();
+                while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $obj->setPk($rs->pk);
+                    $obj->setPat_nome($rs->pat_name);
+                    $return = clone $obj;
+                }
+                return $return;
+            }
+            return NULL;
+        } catch(PDOException $e) {
+            echo 'Ocorreu um erro =>'. $e->getMessage();
+        }
+    }
+
 }
