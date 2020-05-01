@@ -77,8 +77,7 @@ $("#btn-login-paciente").click(function () {
                 setTimeout(() => {
                     $("#login-alert").css('display', 'none')
                     $("#mensagem").html('');
-                    // window.location.href = "production/index.php";
-                    alert('Vai para o baguio');
+                    window.location.href = "production/area_paciente.php";
                 }, 1500);
             } else {
                 toastr.error(result.mensagem, 'Ops!');

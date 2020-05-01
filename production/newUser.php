@@ -9,7 +9,7 @@ require_once '../class/Usuario.php';
 if ($_SESSION['tipo'] != 'Med') {
 	session_destroy();
 	header('Status: 403 Acesso Proíbido', false, 403);
-	header('Localização: ../index.html');
+	header('Location: ../index.html');
 	exit();
 }
 

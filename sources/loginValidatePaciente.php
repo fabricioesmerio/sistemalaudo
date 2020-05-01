@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once '../Config/functions.php';
 require_once '../DAO/PatientDAO.php';
 require_once '../class/Patient.php';
@@ -23,9 +23,10 @@ $patient = new Patient();
 $patientDAO = new PatientDAO();
 $patient = $patientDAO->auth($login, $senha);
 if ($patient) {
+    $_SESSION['tipo'] = "Pat";
     $_SESSION['id'] = $patient->getPk();
     $_SESSION['nomeUsuario'] = $patient->getPat_nome();
-    $_SESSION['tipo'] = "Pat";
+    $_SESSION['logado'] = TRUE;
     $retorno = array('codigo' => 1, 'mensagem' => 'Login efetuado com sucesso!');
     echo json_encode($retorno);
     exit();
