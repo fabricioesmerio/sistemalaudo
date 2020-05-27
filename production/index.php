@@ -1,16 +1,18 @@
 <?php
+session_start();
+if ($_SESSION['tipo'] != 'Med') {
+	session_destroy();
+	header('Status: 403 Acesso Proibido', false, 403);
+	header('Location: ../erro403.html');
+	exit();
+}
+
 require_once 'header.php';
 require_once 'sidebar.php';
 require_once 'navigation.php';
 require_once '../class/Study.php';
 require_once '../DAO/StudyDAO.php';
 
-if ($_SESSION['tipo'] != 'Med') {
-	session_destroy();
-	header('Status: 403 Acesso Proibido', false, 403);
-	header('Location: ../index.html');
-	exit();
-}
 
 $limit = 10;
 $study = new Study();
@@ -61,8 +63,8 @@ if (isset($_GET['term'])) {
 	$term = filter_input(INPUT_GET, 'term', FILTER_SANITIZE_STRING);
 	$study = $studyDAO->getListStudyTerm($term, $limit, null);
 } elseif (isset($_GET['period'])) {
-	$term = filter_input(INPUT_GET, 'period', FILTER_SANITIZE_STRING);
-	$study = $studyDAO->getListStudyByDate($term);
+	$period = filter_input(INPUT_GET, 'period', FILTER_SANITIZE_STRING);
+	$study = $studyDAO->getListStudyByDate($period);
 } else {
 	$study = $studyDAO->getListStudy(null, $limit, $offset);
 }
@@ -121,7 +123,7 @@ if (isset($_GET['term'])) {
 				</div>
 
 				<div class="btn-group" role="group">
-					<button type="button" class="btn btn btn-info">
+					<button type="button" class="btn btn btn-info" onclick="filterDate('all')">
 						Todos
 						<i class="fa fa-calendar-times-o" aria-hidden="true"></i>
 					</button>

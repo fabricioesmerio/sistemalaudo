@@ -132,6 +132,10 @@ function filterDate(filter) {
             case 'lastMonth':
                 document.location.assign(`index.php?period=${day.subtract(1, 'month').format('YYYY-MM-DD')}`);
                 break;
+            case 'all':
+                console.log('ddplasp');
+                document.location.assign(`index.php`);
+                break;
         
             default:
                 break;

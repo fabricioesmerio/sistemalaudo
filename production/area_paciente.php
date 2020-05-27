@@ -60,8 +60,14 @@ $study = $studyDAO->getByPatient($_SESSION['id']);
 											<td><?= $obj->getStudy_desc() ?></td>
 											<td><?= date('d/m/Y H:i', strtotime($obj->getStudy_datetime())) ?>
 											</td>
-											<td class="controls">
-
+											<td class="controls" style="padding: 0px">
+												<?php
+												if ($obj->getFinaliza_laudo()) { ?>
+													<a class="btn btn-primary" href="tmpl_laudo.html">
+														Laudo
+													</a>
+												<?php	}
+												?>
 											</td>
 										<?php
 									}
