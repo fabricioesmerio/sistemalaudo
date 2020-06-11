@@ -63,7 +63,7 @@ $study = $studyDAO->getByPatient($_SESSION['id']);
 											<td class="controls" style="padding: 0px">
 												<?php
 												if ($obj->getFinaliza_laudo()) { ?>
-													<a class="btn btn-primary" href="tmpl_laudo.html">
+													<a class="btn btn-primary" onclick="<?php $_SESSION['study_id'] = $obj->getPk();?>" href="pdf.php?ref=<?= $obj->getPk()?>">
 														Laudo
 													</a>
 												<?php	}
