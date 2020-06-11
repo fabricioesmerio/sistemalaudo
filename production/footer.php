@@ -3,7 +3,7 @@
 <!-- footer content -->
 <footer>
     <div class="pull-right">
-        &copy <?= date("Y"); ?> - Desenvolvido por <a href="#">Fabrício Esmério</a>
+        &copy <?= date("Y"); ?> - Desenvolvido por <a href="https://web.whatsapp.com/send?phone=5555981435684&amp;text=Olá, estou interessado em desenvolver um site ou sistema e quero fazer um orçamento, poderia me ajudar?">Fabrício Esmério</a>
     </div>
     <div class="clearfix"></div>
 </footer>

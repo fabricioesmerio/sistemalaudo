@@ -77,7 +77,7 @@ $("#btn-login-paciente").click(function () {
                 setTimeout(() => {
                     $("#login-alert").css('display', 'none')
                     $("#mensagem").html('');
-                    window.location.href = "production/area_paciente.php";
+                    window.location.href = "production/index.php";
                 }, 1500);
             } else {
                 toastr.error(result.mensagem, 'Ops!');

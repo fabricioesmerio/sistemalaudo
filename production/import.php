@@ -17,15 +17,13 @@ if (isset($_GET['stuNumber'])) {
     $patFile = new PatientArquivo();
     $patFileDAO = new PatientArquivoDAO();
 
-    if (isset($_POST['save'])) {
+    if (isset($_POST['save']) && $_SESSION['tipo'] == 'Med') {
         $patFile = new PatientArquivo();
         $name = $_FILES['file']['name'];
         $type = $_FILES['file']['type'];
         $size = $_FILES['file']['size'];
         $data = fopen($_FILES['file']['tmp_name'], 'rb');;
 
-
-        // $allowExtension = array("image/jpg", "image/gif", "image/png", "application/pdf", "application/vnd.ms-powerpoint");
         $allowExtension = array("jpg", "jpeg", "gif", "png", "pdf", "doc", "docx", "calc", "xls", "xlsx", "odt", "sxw", "rtf");
 
         if (!in_array(explode('.', $name)[1], $allowExtension)) {
@@ -37,8 +35,6 @@ if (isset($_GET['stuNumber'])) {
                 $_SESSION['showMessage'] = 'error';
             }
         }
-
-
     }
 
 
@@ -66,15 +62,19 @@ if (isset($_GET['stuNumber'])) {
                         <div class="flex-5 c-field"> <?= date('d/m/Y H:i', strtotime($study->getStudy_datetime())) ?> </div>
                     </div>
                 </div>
-                <h2>Importar Arquivos</h2>
-                <form action="" method="POST" enctype="multipart/form-data">
+                <?php
+                if ($_SESSION['tipo'] == 'Med') { ?>
 
-                    <input type="file" name="file" id="file">
-                    <div class="flex justify-end mt-4">
-                        <button type="submit" name="save" class="btn btn-primary" style="margin-right: 0px">Salvar</button>
-                    </div>
-                </form>
-                
+                    <h2>Importar Arquivos</h2>
+                    <form action="" method="POST" enctype="multipart/form-data">
+
+                        <input type="file" name="file" id="file">
+                        <div class="flex justify-end mt-4">
+                            <button type="submit" name="save" class="btn btn-primary" style="margin-right: 0px">Salvar</button>
+                        </div>
+                    </form>
+                <?php }
+                ?>
             </div>
             <div class="table-responsive">
                 <table class="table" id="tableFile">
@@ -93,12 +93,16 @@ if (isset($_GET['stuNumber'])) {
                             $cod = 1;
                             foreach ($patFile as $obj) {
                                 echo '<tr>';
-                                echo '<td>'. $cod++ .'</td>';
-                                echo '<td>'. explode('.', $obj->getNome())[0] .'</td>';
-                                echo '<td>'. number_format($obj->getTamanho() / 1024, 2, ',', '') .'kB </td>';
-                                echo '<td>'. strtoupper(explode('/', $obj->getMimeType())[1])  .'</td>';
-                                echo '<td><a target="_blank"  class="btn btn-info" href="viewImports.php?fileId='. $obj->getId() .'">Ver</a>  
-                                <a class="btn btn-danger" onclick="onDelete(this.parentNode.parentNode.rowIndex, '. $obj->getId() .')" href="#">Excluir</a></td>';
+                                echo '<td>' . $cod++ . '</td>';
+                                echo '<td>' . explode('.', $obj->getNome())[0] . '</td>';
+                                echo '<td>' . number_format($obj->getTamanho() / 1024, 2, ',', '') . 'kB </td>';
+                                echo '<td>' . strtoupper(explode('/', $obj->getMimeType())[1])  . '</td>';
+                                echo '<td>  ';
+                                if ($_SESSION['tipo'] == 'Med') {
+                                    echo '<a class="btn btn-danger" onclick="onDelete(this.parentNode.parentNode.rowIndex, ' . $obj->getId() . ')" href="#">Excluir</a>';
+                                }
+                                echo '<a target="_blank"  class="btn btn-info" href="viewImports.php?fileId=' . $obj->getId() . '">Ver</a>';
+                                echo '</td>';
                                 echo '</tr>';
                             }
                         }
@@ -123,10 +127,10 @@ if (isset($_GET['stuNumber'])) {
                 <?php break;
                 case 'error': ?>
                     toastr.error('Ocorreu um erro ao salvar.', 'Ops!');
-        <?php break;
+                <?php break;
                 case 'deniedExtension': ?>
-                toastr.error('Extensão do arquivo inválido.', 'Ops!');
-                <?php 
+                    toastr.error('Extensão do arquivo inválido.', 'Ops!');
+        <?php
                 default:
                     break;
             }
@@ -134,34 +138,34 @@ if (isset($_GET['stuNumber'])) {
         }
         ?>
 
-    function onDelete(index, idElement) {
-        console.log('onDelete:: index', index);
-        console.log('onDelete:: idElement',idElement);
-        let _r = confirm('Realmente deseja excluir o arquivo?');
-        if (!_r) return;
-        var form = new FormData();
-        form.append('idFile', idElement);
-        fetch('deleteFile.php', {
-            method: 'POST',
-            body: form
-        })
-        .then(function(response) {
-            console.log('response then', response);
-            if (response.ok && response.status == 200) {
-                toastr.success('Registro excluído com sucesso.', 'Sucesso!');
-                deleteRow(index);
-            } else {
-                toastr.error('Ocorreu um erro ao excluir.', 'Ops!');
-            }
-        })
-        .catch(function (error) {
-            toastr.error('Ocorreu um erro ao excluir.', 'Ops!');
-        })
-    }
+        function onDelete(index, idElement) {
+            console.log('onDelete:: index', index);
+            console.log('onDelete:: idElement', idElement);
+            let _r = confirm('Realmente deseja excluir o arquivo?');
+            if (!_r) return;
+            var form = new FormData();
+            form.append('idFile', idElement);
+            fetch('deleteFile.php', {
+                    method: 'POST',
+                    body: form
+                })
+                .then(function(response) {
+                    console.log('response then', response);
+                    if (response.ok && response.status == 200) {
+                        toastr.success('Registro excluído com sucesso.', 'Sucesso!');
+                        deleteRow(index);
+                    } else {
+                        toastr.error('Ocorreu um erro ao excluir.', 'Ops!');
+                    }
+                })
+                .catch(function(error) {
+                    toastr.error('Ocorreu um erro ao excluir.', 'Ops!');
+                })
+        }
 
-    function deleteRow(index) {
-        document.getElementById('tableFile').deleteRow(index);
-    }
+        function deleteRow(index) {
+            document.getElementById('tableFile').deleteRow(index);
+        }
     </script>
 <?php
 } else {
